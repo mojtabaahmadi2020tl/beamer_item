@@ -1,0 +1,82 @@
+% M.ahmadi  1400.07.27
+% @Tex_Ahmadi 
+% تست شده با تکلایو 2021
+% !TeX TS-program = xelatex
+\documentclass{beamer}
+\usetheme{Warsaw}
+
+\usefonttheme{serif}
+\usepackage{xepersian}
+\settextfont{Yas}
+
+
+%++++++++
+\makeatletter
+\expandafter\let\csname beamer@@tmpop@itemize item@default\endcsname\relax
+\expandafter\let\csname beamer@@tmpop@itemize subitem@default\endcsname\relax
+\expandafter\let\csname beamer@@tmpop@itemize subsubitem@default\endcsname\relax
+
+\defbeamertemplate*{itemize item}{default}{\scriptsize\raise1.25pt\hbox{\donotcoloroutermaths$\blacktriangleleft$}}
+\defbeamertemplate*{itemize subitem}{default}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$\blacktriangleleft$}}
+\defbeamertemplate*{itemize subsubitem}{default}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$\blacktriangleleft$}}
+
+\bidi@patchcmd{\@listi}{\leftmargin}{\rightmargin}{}{}
+\let\@listI\@listi
+\bidi@patchcmd{\@listii}{\leftmargin}{\rightmargin}{}{}
+\bidi@patchcmd{\@listiii}{\leftmargin}{\rightmargin}{}{}
+\bidi@patchcmd{\beamer@enum@}{\raggedright}{\raggedleft}{}{}
+\bidi@patchcmd{\@@description}{\raggedright}{\raggedleft}{}{}
+\bidi@patchcmd{\@@description}{\leftmargin}{\rightmargin}{}{}
+
+\renewcommand{\itemize}[1][]{%
+  \beamer@ifempty{#1}{}{\def\beamer@defaultospec{#1}}%
+  \ifnum \@itemdepth >2\relax\@toodeep\else
+    \advance\@itemdepth\@ne
+    \beamer@computepref\@itemdepth% sets \beameritemnestingprefix
+    \usebeamerfont{itemize/enumerate \beameritemnestingprefix body}%
+    \usebeamercolor[fg]{itemize/enumerate \beameritemnestingprefix body}%
+    \usebeamertemplate{itemize/enumerate \beameritemnestingprefix body begin}%
+    \list
+      {\usebeamertemplate{itemize \beameritemnestingprefix item}}
+      {\def\makelabel##1{%
+          {%
+            \hss\llap{{%
+                \usebeamerfont*{itemize \beameritemnestingprefix item}%
+                \usebeamercolor[fg]{itemize \beameritemnestingprefix item}##1}}%
+          }%
+        }%
+      }
+  \fi%
+  \beamer@cramped%
+  \raggedleft%
+  \beamer@firstlineitemizeunskip%
+}
+\makeatother
+\raggedleft
+%++++++++
+
+\title{یک اسلاید نمونه}
+\author{مجتبیٰ احمدی}
+
+
+\begin{document}
+\section{بخش}
+\begin{frame}
+توجه:
+\begin{enumerate}
+\item 
+این یک متن است که در اینجا قرار می‌دهیم.
+\end{enumerate}
+\begin{itemize}
+\item 
+این یک متن است که در اینجا قرار می‌دهیم.
+\end{itemize}
+\begin{description}
+\item[آزمایش]
+این یک متن است که در اینجا قرار می‌دهیم.
+\end{description}
+
+\end{frame}
+
+
+\end{document}
